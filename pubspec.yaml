@@ -38,7 +38,7 @@ dev_dependencies:
 
 flutter:
   assets:
-   - lib/assets/
+   - assets/
   fonts:
    - family: FatIcons
      fonts:

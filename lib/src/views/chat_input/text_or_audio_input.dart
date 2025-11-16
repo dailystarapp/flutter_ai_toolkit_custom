@@ -64,7 +64,7 @@ class TextOrAudioInput extends StatelessWidget {
   final InputState _inputState;
   final ActionButtonStyle _cancelButtonStyle;
   final Widget _actionButton;
-  static const _minInputHeight = 48.0;
+  static const _minInputHeight = 96.0;
   static const _maxInputHeight = 144.0;
 
   @override

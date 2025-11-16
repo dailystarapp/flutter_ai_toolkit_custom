@@ -40,15 +40,12 @@ class UserMessageView extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 6),
             child: Align(
               alignment: Alignment.topRight,
-              child: Builder(
-                builder: (context) {
-                  final screenWidth = MediaQuery.of(context).size.width;
-                  final attachmentWidth = screenWidth * 2 / 3;
-                  return SizedBox(
-                    width: attachmentWidth,
-                    child: AttachmentView(attachment),
-                  );
-                },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: AspectRatio(
+                  aspectRatio: 3 / 2,
+                  child: AttachmentView(attachment),
+                ),
               ),
             ),
           ),
