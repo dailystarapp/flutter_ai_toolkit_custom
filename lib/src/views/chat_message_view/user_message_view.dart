@@ -44,12 +44,12 @@ class UserMessageView extends StatelessWidget {
                 builder: (context) {
                   final screenWidth = MediaQuery.of(context).size.width;
                   final attachmentWidth = screenWidth * 2 / 3;
-                  return SizedBox(
-                    width: attachmentWidth,
-                    child: AspectRatio(
-                      aspectRatio: 3 / 2, // width : height ratio (e.g., 3:2)
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: SizedBox(
+                      width: attachmentWidth,
+                      child: AspectRatio(
+                        aspectRatio: 3 / 2, // width : height ratio (e.g., 3:2)
                         child: AttachmentView(attachment),
                       ),
                     ),

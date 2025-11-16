@@ -196,7 +196,7 @@ class _ChatInputState extends State<ChatInput> {
                       inputState: _inputState,
                       cancelButtonStyle: _chatStyle!.cancelButtonStyle!,
                       actionButton: Padding(
-                        padding: const EdgeInsets.only(left: 8, bottom: 8),
+                        padding: const EdgeInsets.only(right: 8, bottom: 8),
                         child: InputButton(
                           inputState: _inputState,
                           chatStyle: _chatStyle!,

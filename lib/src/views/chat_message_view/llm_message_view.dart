@@ -3,13 +3,13 @@
 // found in the LICENSE file.
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_ai_toolkit/src/views/rotating_starts_progress_indicator/rotating_svg_progress_indicator.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
 import '../../chat_view_model/chat_view_model_client.dart';
 import '../../providers/interface/chat_message.dart';
 import '../../styles/llm_chat_view_style.dart';
 import '../../styles/llm_message_style.dart';
-import '../jumping_dots_progress_indicator/jumping_dots_progress_indicator.dart';
 import 'adaptive_copy_text.dart';
 import 'hovering_buttons.dart';
 
@@ -68,15 +68,14 @@ class LlmMessageView extends StatelessWidget {
                       clipboardText: text,
                       child: Container(
                         decoration: llmStyle.decoration,
-                        margin: const EdgeInsets.only(left: 40),
+                        margin: const EdgeInsets.only(left: 48),
                         padding: const EdgeInsets.all(8),
                         child:
                             text == null
                                 ? SizedBox(
-                                  width: 32,
-                                  child: JumpingDotsProgressIndicator(
-                                    fontSize: 24,
-                                    color: chatStyle.progressIndicatorColor!,
+                                  width: 80,
+                                  child: RotatingSvgProgressIndicator(
+                                    svgAsset: 'assets/star.svg',
                                   ),
                                 )
                                 : AdaptiveCopyText(
