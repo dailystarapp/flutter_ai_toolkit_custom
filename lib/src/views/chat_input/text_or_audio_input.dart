@@ -83,6 +83,7 @@ class TextOrAudioInput extends StatelessWidget {
               maxHeight: _maxInputHeight,
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Expanded(
                   child:

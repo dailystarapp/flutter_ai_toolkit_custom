@@ -172,47 +172,40 @@ class _ChatInputState extends State<ChatInput> {
               (context, value, child) => ListenableBuilder(
                 listenable: _waveController,
                 builder:
-                    (context, child) => Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          child: TextOrAudioInput(
-                            attachmentsWidget:
-                                _viewModel!.enableAttachments
-                                    ? Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 8,
-                                        bottom: 8,
-                                      ),
-                                      child: AttachmentActionBar(
-                                        onAttachments: onAttachments,
-                                      ),
-                                    )
-                                    : null,
-                            inputStyle: _inputStyle!,
-                            waveController: _waveController,
-                            onCancelEdit: widget.onCancelEdit,
-                            onRecordingStopped: onRecordingStopped,
-                            onSubmitPrompt: onSubmitPrompt,
-                            textController: _textController,
-                            focusNode: _focusNode,
-                            autofocus: widget.autofocus,
-                            inputState: _inputState,
-                            cancelButtonStyle: _chatStyle!.cancelButtonStyle!,
-                            actionButton: Padding(
-                              padding: const EdgeInsets.only(bottom: 14),
-                              child: InputButton(
-                                inputState: _inputState,
-                                chatStyle: _chatStyle!,
-                                onSubmitPrompt: onSubmitPrompt,
-                                onCancelPrompt: onCancelPrompt,
-                                onStartRecording: onStartRecording,
-                                onStopRecording: onStopRecording,
-                              ),
-                            ),
-                          ),
+                    (context, child) => TextOrAudioInput(
+                      attachmentsWidget:
+                          _viewModel!.enableAttachments
+                              ? Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 8,
+                                  bottom: 8,
+                                ),
+                                child: AttachmentActionBar(
+                                  onAttachments: onAttachments,
+                                ),
+                              )
+                              : null,
+                      inputStyle: _inputStyle!,
+                      waveController: _waveController,
+                      onCancelEdit: widget.onCancelEdit,
+                      onRecordingStopped: onRecordingStopped,
+                      onSubmitPrompt: onSubmitPrompt,
+                      textController: _textController,
+                      focusNode: _focusNode,
+                      autofocus: widget.autofocus,
+                      inputState: _inputState,
+                      cancelButtonStyle: _chatStyle!.cancelButtonStyle!,
+                      actionButton: Padding(
+                        padding: const EdgeInsets.only(left: 8, bottom: 8),
+                        child: InputButton(
+                          inputState: _inputState,
+                          chatStyle: _chatStyle!,
+                          onSubmitPrompt: onSubmitPrompt,
+                          onCancelPrompt: onCancelPrompt,
+                          onStartRecording: onStartRecording,
+                          onStopRecording: onStopRecording,
                         ),
-                      ],
+                      ),
                     ),
               ),
         ),
