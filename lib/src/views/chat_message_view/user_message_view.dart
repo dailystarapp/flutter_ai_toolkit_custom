@@ -43,7 +43,7 @@ class UserMessageView extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: AspectRatio(
-                  aspectRatio: 3 / 2,
+                  aspectRatio: 1,
                   child: AttachmentView(attachment),
                 ),
               ),
