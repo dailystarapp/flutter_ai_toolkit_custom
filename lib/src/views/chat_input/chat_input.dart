@@ -181,7 +181,8 @@ class _ChatInputState extends State<ChatInput> {
                                 _viewModel!.enableAttachments
                                     ? Padding(
                                       padding: const EdgeInsets.only(
-                                        bottom: 14,
+                                        left: 8,
+                                        bottom: 8,
                                       ),
                                       child: AttachmentActionBar(
                                         onAttachments: onAttachments,

@@ -52,8 +52,8 @@ class LlmMessageView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Container(
-                        height: 32,
-                        width: 32,
+                        height: 40,
+                        width: 40,
                         decoration: llmStyle.iconDecoration,
                         child: Icon(
                           llmStyle.icon,
@@ -68,7 +68,7 @@ class LlmMessageView extends StatelessWidget {
                       clipboardText: text,
                       child: Container(
                         decoration: llmStyle.decoration,
-                        margin: const EdgeInsets.only(left: 28),
+                        margin: const EdgeInsets.only(left: 56),
                         padding: const EdgeInsets.all(8),
                         child:
                             text == null
