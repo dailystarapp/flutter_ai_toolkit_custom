@@ -49,7 +49,7 @@ class UserMessageView extends StatelessWidget {
                     child: SizedBox(
                       width: attachmentWidth,
                       child: AspectRatio(
-                        aspectRatio: 3 / 2,
+                        aspectRatio: 2 / 3,
                         child: AttachmentView(attachment),
                       ),
                     ),
