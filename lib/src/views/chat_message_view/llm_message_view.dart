@@ -52,13 +52,13 @@ class LlmMessageView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Container(
-                        height: 20,
-                        width: 20,
+                        height: 32,
+                        width: 32,
                         decoration: llmStyle.iconDecoration,
                         child: Icon(
                           llmStyle.icon,
                           color: llmStyle.iconColor,
-                          size: 12,
+                          size: 32,
                         ),
                       ),
                     ),

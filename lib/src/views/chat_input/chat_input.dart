@@ -175,15 +175,19 @@ class _ChatInputState extends State<ChatInput> {
                     (context, child) => Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        if (_viewModel!.enableAttachments)
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 14),
-                            child: AttachmentActionBar(
-                              onAttachments: onAttachments,
-                            ),
-                          ),
                         Expanded(
                           child: TextOrAudioInput(
+                            attachmentsWidget:
+                                _viewModel!.enableAttachments
+                                    ? Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 14,
+                                      ),
+                                      child: AttachmentActionBar(
+                                        onAttachments: onAttachments,
+                                      ),
+                                    )
+                                    : null,
                             inputStyle: _inputStyle!,
                             waveController: _waveController,
                             onCancelEdit: widget.onCancelEdit,
@@ -194,17 +198,17 @@ class _ChatInputState extends State<ChatInput> {
                             autofocus: widget.autofocus,
                             inputState: _inputState,
                             cancelButtonStyle: _chatStyle!.cancelButtonStyle!,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 14),
-                          child: InputButton(
-                            inputState: _inputState,
-                            chatStyle: _chatStyle!,
-                            onSubmitPrompt: onSubmitPrompt,
-                            onCancelPrompt: onCancelPrompt,
-                            onStartRecording: onStartRecording,
-                            onStopRecording: onStopRecording,
+                            actionButton: Padding(
+                              padding: const EdgeInsets.only(bottom: 14),
+                              child: InputButton(
+                                inputState: _inputState,
+                                chatStyle: _chatStyle!,
+                                onSubmitPrompt: onSubmitPrompt,
+                                onCancelPrompt: onCancelPrompt,
+                                onStartRecording: onStartRecording,
+                                onStopRecording: onStopRecording,
+                              ),
+                            ),
                           ),
                         ),
                       ],

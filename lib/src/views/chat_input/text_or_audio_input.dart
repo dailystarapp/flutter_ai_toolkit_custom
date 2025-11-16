@@ -27,6 +27,7 @@ class TextOrAudioInput extends StatelessWidget {
   /// - [cancelButtonStyle]: Defines the styling for the cancel button.
   const TextOrAudioInput({
     super.key,
+    Widget? attachmentsWidget,
     required ChatInputStyle inputStyle,
     required WaveformRecorderController waveController,
     required void Function()? onCancelEdit,
@@ -37,7 +38,9 @@ class TextOrAudioInput extends StatelessWidget {
     required bool autofocus,
     required InputState inputState,
     required ActionButtonStyle cancelButtonStyle,
-  }) : _cancelButtonStyle = cancelButtonStyle,
+    required Widget actionButton,
+  }) : _attachmentsWidget = attachmentsWidget,
+       _cancelButtonStyle = cancelButtonStyle,
        _inputState = inputState,
        _autofocus = autofocus,
        _focusNode = focusNode,
@@ -46,8 +49,10 @@ class TextOrAudioInput extends StatelessWidget {
        _onRecordingStopped = onRecordingStopped,
        _onCancelEdit = onCancelEdit,
        _waveController = waveController,
-       _inputStyle = inputStyle;
+       _inputStyle = inputStyle,
+       _actionButton = actionButton;
 
+  final Widget? _attachmentsWidget;
   final ChatInputStyle _inputStyle;
   final WaveformRecorderController _waveController;
   final void Function()? _onCancelEdit;
@@ -58,6 +63,7 @@ class TextOrAudioInput extends StatelessWidget {
   final bool _autofocus;
   final InputState _inputState;
   final ActionButtonStyle _cancelButtonStyle;
+  final Widget _actionButton;
   static const _minInputHeight = 48.0;
   static const _maxInputHeight = 144.0;
 
@@ -78,7 +84,8 @@ class TextOrAudioInput extends StatelessWidget {
               minHeight: _minInputHeight,
               maxHeight: _maxInputHeight,
             ),
-            child:
+            child: Column(
+              children: [
                 _waveController.isRecording
                     ? WaveformRecorder(
                       controller: _waveController,
@@ -107,6 +114,15 @@ class TextOrAudioInput extends StatelessWidget {
                         vertical: 8,
                       ),
                     ),
+                Row(
+                  children: [
+                    if (_attachmentsWidget != null)
+                      Expanded(child: _attachmentsWidget),
+                    _actionButton,
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
