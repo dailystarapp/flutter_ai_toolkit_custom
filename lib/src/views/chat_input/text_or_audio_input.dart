@@ -85,7 +85,8 @@ class TextOrAudioInput extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Expanded(
+                Flexible(
+                  fit: FlexFit.loose,
                   child:
                       _waveController.isRecording
                           ? WaveformRecorder(
