@@ -38,7 +38,7 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/star.svg
+   - lib/assets/
   fonts:
    - family: FatIcons
      fonts:
