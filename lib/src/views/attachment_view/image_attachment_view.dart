@@ -26,8 +26,9 @@ class ImageAttachmentView extends StatelessWidget {
   final Attachment attachment;
 
   @override
-  Widget build(BuildContext context) => Align(
+  Widget build(BuildContext context) => FittedBox(
     alignment: Alignment.centerRight,
+    fit: BoxFit.cover,
     child: GestureDetector(
       onTap: () => unawaited(_showPreviewDialog(context)),
       child: switch (attachment) {
