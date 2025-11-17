@@ -36,7 +36,7 @@ class LlmMessageView extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     children: [
       Flexible(
-        flex: 6,
+        flex: 8,
         child: Column(
           children: [
             ChatViewModelClient(
@@ -103,7 +103,7 @@ class LlmMessageView extends StatelessWidget {
           ],
         ),
       ),
-      const Flexible(flex: 2, child: SizedBox()),
+      const Flexible(flex: 1, child: SizedBox()),
     ],
   );
 }
