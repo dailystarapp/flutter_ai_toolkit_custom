@@ -23,7 +23,7 @@ class RotatingSvgProgressIndicator extends StatefulWidget {
     super.key,
     this.numberOfElements = 2,
     this.iconsSize = const [24.0, 12.0],
-    this.starsSpacing = 0.0,
+    this.starsSpacing = 8.0,
     this.milliseconds = 250,
     this.packageName,
   });
