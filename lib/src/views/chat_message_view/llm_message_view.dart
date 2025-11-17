@@ -36,7 +36,7 @@ class LlmMessageView extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     children: [
       Flexible(
-        flex: 8,
+        flex: 9,
         child: Column(
           children: [
             ChatViewModelClient(
