@@ -17,6 +17,7 @@ class RotatingSvg extends AnimatedWidget {
     required Animation<double> animation,
     required this.iconSize,
     required this.svgAsset,
+    this.packageName,
 
     super.key,
   }) : super(listenable: animation);
@@ -27,6 +28,9 @@ class RotatingSvg extends AnimatedWidget {
   /// The asset path of the .
   final String svgAsset;
 
+  /// Optional package name when the asset is bundled inside a package.
+  final String? packageName;
+
   Animation<double> get _animation => listenable as Animation<double>;
 
   @override
@@ -34,7 +38,12 @@ class RotatingSvg extends AnimatedWidget {
     height: iconSize,
     child: Transform.rotate(
       angle: _animation.value * 2 * 3.1416, // Full rotation per animation cycle
-      child: SvgPicture.asset(svgAsset, width: iconSize, height: iconSize),
+      child: SvgPicture.asset(
+        svgAsset,
+        package: packageName,
+        width: iconSize,
+        height: iconSize,
+      ),
     ),
   );
 }

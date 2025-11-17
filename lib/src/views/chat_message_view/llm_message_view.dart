@@ -76,6 +76,7 @@ class LlmMessageView extends StatelessWidget {
                                   width: 80,
                                   child: RotatingSvgProgressIndicator(
                                     svgAsset: 'assets/star.svg',
+                                    packageName: 'flutter_ai_toolkit',
                                   ),
                                 )
                                 : AdaptiveCopyText(

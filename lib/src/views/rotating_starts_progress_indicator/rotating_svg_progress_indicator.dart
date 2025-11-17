@@ -25,12 +25,14 @@ class RotatingSvgProgressIndicator extends StatefulWidget {
     this.iconsSize = const [24.0, 12.0],
     this.starsSpacing = 0.0,
     this.milliseconds = 250,
+    this.packageName,
   });
 
   /// Number of dots that are added in a horizontal list, default = 3.
   final int numberOfElements;
 
   /// Font size of each dot, default = 10.0.
+  /// This is a list where each element corresponds to the size of each svg.
   final List<double> iconsSize;
 
   /// Spacing between each dot, default 0.0.
@@ -41,6 +43,9 @@ class RotatingSvgProgressIndicator extends StatefulWidget {
 
   /// The svg asset to be used.
   final String svgAsset;
+
+  /// Optional package name when the asset is bundled inside a package.
+  final String? packageName;
 
   @override
   State<RotatingSvgProgressIndicator> createState() =>
@@ -55,6 +60,12 @@ class _RotatingSvgProgressIndicatorState
   final _widgets = <Widget>[];
   static const double _beginTweenValue = 0;
   static const double _endTweenValue = 8;
+
+  double _getIconSize(int index) {
+    if (index < widget.iconsSize.length) return widget.iconsSize[index];
+    if (widget.iconsSize.isNotEmpty) return widget.iconsSize.first;
+    return 24.0; // fallback
+  }
 
   @override
   void initState() {
@@ -83,15 +94,16 @@ class _RotatingSvgProgressIndicatorState
           padding: EdgeInsets.only(right: widget.starsSpacing),
           child: RotatingSvg(
             animation: _animations[svgIndex],
-            iconSize: widget.iconsSize[svgIndex],
+            iconSize: _getIconSize(svgIndex),
             svgAsset: widget.svgAsset,
+            packageName: widget.packageName,
           ),
         ),
       );
     }
 
     // start the animation
-    _controllers[0].forward();
+    if (_controllers.isNotEmpty) _controllers[0].forward();
   }
 
   void _dotListener(AnimationStatus status, int dot) {
@@ -112,13 +124,13 @@ class _RotatingSvgProgressIndicatorState
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: widget.iconsSize[0] + (widget.iconsSize[0] * 0.5),
+    height: _getIconSize(0) + (_getIconSize(0) * 0.5),
     child: Row(mainAxisAlignment: MainAxisAlignment.center, children: _widgets),
   );
 
   @override
   void dispose() {
-    for (var i = 0; i < widget.numberOfElements; i++) {
+    for (var i = 0; i < _controllers.length; i++) {
       _controllers[i].dispose();
     }
 
