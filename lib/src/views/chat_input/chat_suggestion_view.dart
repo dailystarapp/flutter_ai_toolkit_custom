@@ -50,7 +50,10 @@ class ChatSuggestionsView extends StatelessWidget {
               onTap: () => onSelectSuggestion(suggestion),
               child: Container(
                 margin: const EdgeInsets.all(8),
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 24,
+                ),
                 decoration: suggestionStyle.decoration,
                 child: Text(
                   suggestion,
