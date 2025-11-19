@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import '../../chat_view_model/chat_view_model_client.dart';
 import '../../styles/suggestion_style.dart';
@@ -12,14 +12,20 @@ import '../../styles/suggestion_style.dart';
 class ChatSuggestionsView extends StatelessWidget {
   /// Creates a [ChatSuggestionsView] widget.
   ///
+  /// The [welcomeMessage] parameter is a string that is displayed at the top
+  /// of the list of suggestions.
   /// The [suggestions] parameter is a list of suggestion strings to display.
   /// The [onSelectSuggestion] parameter is a callback function that is called
   /// when a suggestion is tapped.
   const ChatSuggestionsView({
+    required this.welcomeMessage,
     required this.suggestions,
     required this.onSelectSuggestion,
     super.key,
   });
+
+  /// The message to display at the top of the list of suggestions.
+  final String welcomeMessage;
 
   /// The list of suggestions to display.
   final List<String> suggestions;
@@ -35,6 +41,10 @@ class ChatSuggestionsView extends StatelessWidget {
       );
       return Column(
         children: [
+          Text(
+            welcomeMessage,
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
           for (final suggestion in suggestions)
             GestureDetector(
               onTap: () => onSelectSuggestion(suggestion),

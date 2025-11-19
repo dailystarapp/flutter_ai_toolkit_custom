@@ -18,6 +18,7 @@ class RotatingSvg extends AnimatedWidget {
     required this.iconSize,
     required this.svgAsset,
     this.packageName,
+    this.valueRange = 1.0,
 
     super.key,
   }) : super(listenable: animation);
@@ -31,19 +32,32 @@ class RotatingSvg extends AnimatedWidget {
   /// Optional package name when the asset is bundled inside a package.
   final String? packageName;
 
+  /// The numeric range of the animation values (animation runs from 0 to
+  /// [valueRange]). This is used to normalize the animation value to [0..1]
+  /// when computing rotation so the widget rotates a single full turn per
+  /// animation cycle by default.
+  final double valueRange;
+
   Animation<double> get _animation => listenable as Animation<double>;
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-    height: iconSize,
-    child: Transform.rotate(
-      angle: _animation.value * 2 * 3.1416, // Full rotation per animation cycle
-      child: SvgPicture.asset(
-        svgAsset,
-        package: packageName,
-        width: iconSize,
-        height: iconSize,
+  Widget build(BuildContext context) {
+    // Normalize the animation value into 0..1 before converting to radians.
+    final normalized =
+        valueRange > 0 ? (_animation.value / valueRange) : _animation.value;
+    final angle = (normalized.clamp(0.0, 1.0)) * 2 * 3.141592653589793;
+
+    return SizedBox(
+      height: iconSize,
+      child: Transform.rotate(
+        angle: angle, // Full rotation per animation cycle (normalized)
+        child: SvgPicture.asset(
+          svgAsset,
+          package: packageName,
+          width: iconSize,
+          height: iconSize,
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

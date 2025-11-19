@@ -3,7 +3,8 @@
 // found in the LICENSE file.
 
 import 'package:flutter/cupertino.dart' show CupertinoActivityIndicator;
-import 'package:flutter/material.dart' show CircularProgressIndicator;
+import 'package:flutter/material.dart'
+    show CircularProgressIndicator, IconButton;
 import 'package:flutter/widgets.dart';
 
 import '../utility.dart';
@@ -25,8 +26,25 @@ class AdaptiveCircularProgressIndicator extends StatelessWidget {
   final Color color;
 
   @override
-  Widget build(BuildContext context) =>
-      isCupertinoApp(context)
-          ? CupertinoActivityIndicator(color: color)
-          : CircularProgressIndicator(color: color);
+  Widget build(BuildContext context) {
+    // Build a 24×24 constrained indicator for both platforms.
+    final Widget indicator =
+        isCupertinoApp(context)
+            ? SizedBox(
+              height: 24,
+              width: 24,
+              child: Center(
+                child: CupertinoActivityIndicator(color: color, radius: 12),
+              ),
+            )
+            : SizedBox(
+              height: 24,
+              width: 24,
+              child: CircularProgressIndicator(color: color, strokeWidth: 2),
+            );
+
+    // Place the indicator inside a disabled IconButton (onPressed: null) so it
+    // appears as an icon within the usual icon touch target but is disabled.
+    return IconButton(onPressed: null, icon: indicator, tooltip: null);
+  }
 }

@@ -24,7 +24,7 @@ class RotatingSvgProgressIndicator extends StatefulWidget {
     this.numberOfElements = 2,
     this.iconsSize = const [24.0, 12.0],
     this.starsSpacing = 8.0,
-    this.milliseconds = 250,
+    this.milliseconds = 800,
     this.packageName,
   });
 
@@ -97,6 +97,7 @@ class _RotatingSvgProgressIndicatorState
             iconSize: _getIconSize(svgIndex),
             svgAsset: widget.svgAsset,
             packageName: widget.packageName,
+            valueRange: _endTweenValue,
           ),
         ),
       );

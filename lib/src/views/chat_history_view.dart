@@ -49,32 +49,36 @@ class _ChatHistoryViewState extends State<ChatHistoryView> {
     padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
     child: ChatViewModelClient(
       builder: (context, viewModel, child) {
-        final showWelcomeMessage = viewModel.welcomeMessage != null;
         final showSuggestions =
             viewModel.suggestions.isNotEmpty &&
             viewModel.provider.history.isEmpty;
+        viewModel.suggestions.isNotEmpty && viewModel.provider.history.isEmpty;
         final history = [...viewModel.provider.history];
 
         return ListView.builder(
           reverse: true,
           itemCount: history.length + (showSuggestions ? 1 : 0),
           itemBuilder: (context, index) {
-            if (showWelcomeMessage) {
-              Text(
-                viewModel.welcomeMessage!,
-                style: Theme.of(context).textTheme.bodyLarge,
+            // If we need to show suggestions and the history is empty,
+            // render the suggestions view as the single item.
+            if (showSuggestions && history.isEmpty) {
+              return ChatSuggestionsView(
+                welcomeMessage: viewModel.welcomeMessage!,
+                suggestions: viewModel.suggestions,
+                onSelectSuggestion: widget.onSelectSuggestion,
               );
             }
-            if (showSuggestions) {
-              index -= showWelcomeMessage ? 1 : 0;
-              if (index == history.length - (showWelcomeMessage ? 2 : 0)) {
-                return ChatSuggestionsView(
-                  suggestions: viewModel.suggestions,
-                  onSelectSuggestion: widget.onSelectSuggestion,
-                );
-              }
-            }
+
+            // Compute the message index for the reversed list. Guard against
+            // out-of-range values to avoid RangeError when the item mapping
+            // arithmetic would otherwise produce a negative index.
             final messageIndex = history.length - index - 1;
+            if (messageIndex < 0 || messageIndex >= history.length) {
+              // This can happen if the arithmetic doesn't map to a message
+              // (e.g. mis-sized list while rebuilding). Return an empty
+              // placeholder to avoid crashing the build.
+              return const SizedBox.shrink();
+            }
             final message = history[messageIndex];
             final isLastUserMessage =
                 message.origin.isUser && messageIndex >= history.length - 2;
