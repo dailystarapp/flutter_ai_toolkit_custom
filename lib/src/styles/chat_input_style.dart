@@ -17,6 +17,7 @@ class ChatInputStyle {
     this.hintText,
     this.backgroundColor,
     this.decoration,
+    this.waveColor,
   });
 
   /// Merges the provided styles with the default styles.
@@ -31,6 +32,7 @@ class ChatInputStyle {
       hintText: style?.hintText ?? defaultStyle.hintText,
       backgroundColor: style?.backgroundColor ?? defaultStyle.backgroundColor,
       decoration: style?.decoration ?? defaultStyle.decoration,
+      waveColor: style?.waveColor ?? defaultStyle.waveColor,
     );
   }
 
@@ -64,4 +66,7 @@ class ChatInputStyle {
 
   /// The decoration of the input box.
   final Decoration? decoration;
+
+  /// Recording wave color
+  final Color? waveColor;
 }

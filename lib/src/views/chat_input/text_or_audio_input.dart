@@ -91,6 +91,12 @@ class TextOrAudioInput extends StatelessWidget {
                   child:
                       _waveController.isRecording
                           ? WaveformRecorder(
+                            waveColor:
+                                _inputStyle.waveColor ??
+                                const Color(0xFF000000),
+                            durationTextStyle:
+                                _inputStyle.textStyle ??
+                                TextStyle(color: Color(0xFF000000)),
                             controller: _waveController,
                             height: _minInputHeight,
                             onRecordingStopped: _onRecordingStopped,
