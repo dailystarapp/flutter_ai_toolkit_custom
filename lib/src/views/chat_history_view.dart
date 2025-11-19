@@ -3,12 +3,10 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_ai_toolkit/src/views/chat_input/chat_suggestion_view.dart';
 
 import '../chat_view_model/chat_view_model_client.dart';
 import '../providers/interface/chat_message.dart';
-import '../providers/interface/message_origin.dart';
 import 'chat_message_view/llm_message_view.dart';
 import 'chat_message_view/user_message_view.dart';
 
@@ -55,20 +53,18 @@ class _ChatHistoryViewState extends State<ChatHistoryView> {
         final showSuggestions =
             viewModel.suggestions.isNotEmpty &&
             viewModel.provider.history.isEmpty;
-        final history = [
-          if (showWelcomeMessage)
-            ChatMessage(
-              origin: MessageOrigin.llm,
-              text: viewModel.welcomeMessage,
-              attachments: [],
-            ),
-          ...viewModel.provider.history,
-        ];
+        final history = [...viewModel.provider.history];
 
         return ListView.builder(
           reverse: true,
           itemCount: history.length + (showSuggestions ? 1 : 0),
           itemBuilder: (context, index) {
+            if (showWelcomeMessage) {
+              Text(
+                viewModel.welcomeMessage!,
+                style: Theme.of(context).textTheme.bodyLarge,
+              );
+            }
             if (showSuggestions) {
               index -= showWelcomeMessage ? 1 : 0;
               if (index == history.length - (showWelcomeMessage ? 2 : 0)) {

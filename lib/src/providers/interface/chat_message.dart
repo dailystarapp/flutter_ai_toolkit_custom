@@ -27,7 +27,11 @@ class ChatMessage {
     required this.origin,
     required this.text,
     required this.attachments,
-  }) : assert(origin.isUser && text != null && text.isNotEmpty || origin.isLlm);
+  }) : assert(
+         origin.isLlm ||
+             (origin.isUser &&
+                 ((text != null && text.isNotEmpty) || attachments.isNotEmpty)),
+       );
 
   /// Converts a JSON map representation to a [ChatMessage].
   ///
@@ -70,7 +74,7 @@ class ChatMessage {
   ///
   /// [text] is the content of the user's message.
   /// [attachments] are any files or media the user has attached to the message.
-  factory ChatMessage.user(String text, Iterable<Attachment> attachments) =>
+  factory ChatMessage.user(String? text, Iterable<Attachment> attachments) =>
       ChatMessage(
         origin: MessageOrigin.user,
         text: text,
