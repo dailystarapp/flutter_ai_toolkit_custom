@@ -69,28 +69,25 @@ class UserMessageView extends StatelessWidget {
 
           return Align(
             alignment: Alignment.topRight,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: HoveringButtons(
-                isUserMessage: true,
-                chatStyle: chatStyle,
-                clipboardText: text,
-                onEdit: onEdit,
-                child: DecoratedBox(
-                  decoration: userStyle.decoration!,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                      top: 12,
-                      bottom: 12,
-                    ),
-                    child: AdaptiveCopyText(
-                      chatStyle: chatStyle,
-                      clipboardText: text,
-                      onEdit: onEdit,
-                      child: Text(text, style: userStyle.textStyle),
-                    ),
+            child: HoveringButtons(
+              isUserMessage: true,
+              chatStyle: chatStyle,
+              clipboardText: text,
+              onEdit: onEdit,
+              child: DecoratedBox(
+                decoration: userStyle.decoration!,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    top: 12,
+                    bottom: 12,
+                  ),
+                  child: AdaptiveCopyText(
+                    chatStyle: chatStyle,
+                    clipboardText: text,
+                    onEdit: onEdit,
+                    child: Text(text, style: userStyle.textStyle),
                   ),
                 ),
               ),
